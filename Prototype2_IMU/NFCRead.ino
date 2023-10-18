@@ -13,13 +13,12 @@ void readNFC()
             for (int i = 0; i < rfid.uid.size; i++)
             {
                 Serial.print(rfid.uid.uidByte[i] < 0x10 ? " 0" : " ");
-                Serial.print(rfid.uid.uidByte[i], HEX);
+                Serial.print(rfid.uid.uidByte[i], HEX + "\n");
             }
-            Serial.println("test");
 
             rfid.PICC_HaltA();      // halt PICC
             rfid.PCD_StopCrypto1(); // stop encryption on PCD
         }
-      Serial.println("test");
+        signalAOK();
     }
 }

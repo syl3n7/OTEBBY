@@ -1,16 +1,22 @@
-#include <SoftwareSerial.h> // Library for bluetooth communication
-#include "Wire.h"           // This library allows you to communicate with I2C devices.
-#include <SPI.h>            // for NFC
-#include <MFRC522.h>        // for NFC
+#include <SoftwareSerial.h>      // Library for bluetooth communication
+#include "Wire.h"                // This library allows you to communicate with I2C devices.
+#include <SPI.h>                 // for NFC
+#include <MFRC522.h>             // for NFC
+#include "DFRobotDFPlayerMini.h" // for DF Player MINI module
 
-// NFC pins 10, 11, 12, 13 
+// DF Player Mini uses RX pin
+static const uint8_t PIN_MP3_TX = 8; // Connects to module's RX
+static const uint8_t PIN_MP3_RX = 9; // Connects to module's TX
+SoftwareSerial DFPlayerSerial(PIN_MP3_RX, PIN_MP3_TX);
+DFRobotDFPlayerMini player; // create player objetct
+
+// NFC pins 10, 11, 12, 13
 #define SS_PIN 10
 #define RST_PIN 5
 MFRC522 rfid(SS_PIN, RST_PIN);
 
 // BT
 SoftwareSerial btserial(6, 7); // BT ports 6 for RX/ 7 for TX
-#define ledp 10                // digital pin for the main LED
 int btIN;                      // variable to read info sent from bt
 
 // IMU
@@ -30,11 +36,25 @@ float TimeToEat = 500;
 float TimeToPoop = 500;
 float TimeToScream = 500;
 
+#define ledp 2 // digital pin for the main LED
+
 void setup()
 {
+  DFPlayerSerial.begin(9600); // Start communication with DFPlayer Mini
+  if (player.begin(softwareSerial))
+  {
+    signalAOK();
+    player.volume(30);
+    player.play(1);
+  }
+  else
+  {
+    Serial.println("Connecting to DFPlayer Mini failed!");
+  }
+
   // Sleep Button and LED
-  //pinMode(7, OUTPUT); //LED
-  //pinMode(6, INPUT);  //Button
+  pinMode(2, OUTPUT); // LED
+  // pinMode(3, INPUT);  // Button
 
   // Normal Serial
   Serial.begin(9600);
@@ -56,18 +76,19 @@ void setup()
   SPI.begin();     // init SPI bus
   rfid.PCD_Init(); // init MFRC522
   Serial.print("NFC READY\n");
-}
-void loop()
-{
-  // btRead();
 
-  //readNFC();
+  signalAOK();
 
-  if (rfid.PICC_IsNewCardPresent()) Serial.print("hello");
-
-  delay(1000);
-
-  // readimu();
-
-  // sleepbutton();
-}
+  void loop()
+  {
+    btRead();
+    // delay(2000);
+    Serial.print("\n");
+    readNFC();
+    // delay(2000);
+    Serial.print("\n");
+    readimu();
+    // delay(2000);
+    Serial.print("\n");
+    sleepbutton();
+  }

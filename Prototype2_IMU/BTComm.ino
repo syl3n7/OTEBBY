@@ -1,4 +1,9 @@
-void btRead() {
-  if (btserial.available()) btIN = btserial.read();
-  delay(1000);
-}
+void btRead()
+{
+  if (btserial.available())
+    btIN = btserial.read();
+
+  if (btserial.read() == A)
+  {
+    signalAOK();
+  }
