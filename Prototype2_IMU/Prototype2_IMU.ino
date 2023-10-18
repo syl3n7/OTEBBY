@@ -5,8 +5,8 @@
 #include "DFRobotDFPlayerMini.h" // for DF Player MINI module
 
 // DF Player Mini uses RX pin
-static const uint8_t PIN_MP3_TX = 8; // Connects to module's RX
-static const uint8_t PIN_MP3_RX = 9; // Connects to module's TX
+static const uint8_t PIN_MP3_TX = 9; // Connects to module's RX
+static const uint8_t PIN_MP3_RX = 8; // Connects to module's TX
 SoftwareSerial DFPlayerSerial(PIN_MP3_RX, PIN_MP3_TX);
 DFRobotDFPlayerMini player; // create player objetct
 
@@ -41,9 +41,8 @@ float TimeToScream = 500;
 void setup()
 {
   DFPlayerSerial.begin(9600); // Start communication with DFPlayer Mini
-  if (player.begin(softwareSerial))
+  if (player.begin(DFPlayerSerial))
   {
-    signalAOK();
     player.volume(30);
     player.play(1);
   }
@@ -77,18 +76,18 @@ void setup()
   rfid.PCD_Init(); // init MFRC522
   Serial.print("NFC READY\n");
 
-  signalAOK();
 
+}
   void loop()
   {
     btRead();
-    // delay(2000);
+    //delay(2000);
     Serial.print("\n");
     readNFC();
-    // delay(2000);
+    //delay(2000);
     Serial.print("\n");
     readimu();
-    // delay(2000);
+    //delay(2000);
     Serial.print("\n");
     sleepbutton();
   }
