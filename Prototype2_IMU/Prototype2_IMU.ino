@@ -1,3 +1,4 @@
+#include "Arduino.h"
 #include <SoftwareSerial.h>      // Library for bluetooth communication
 #include "Wire.h"                // This library allows you to communicate with I2C devices.
 #include <SPI.h>                 // for NFC
@@ -5,10 +6,11 @@
 #include "DFRobotDFPlayerMini.h" // for DF Player MINI module
 
 // DF Player Mini uses RX pin
-static const uint8_t PIN_MP3_TX = 9; // Connects to module's RX
-static const uint8_t PIN_MP3_RX = 8; // Connects to module's TX
-SoftwareSerial DFPlayerSerial(PIN_MP3_RX, PIN_MP3_TX);
-DFRobotDFPlayerMini player; // create player objetct
+SoftwareSerial softSerial(/*rx =*/4, /*tx =*/3);
+#define FPSerial softSerial
+DFRobotDFPlayerMini myDFPlayer;
+void printDetail(uint8_t type, int value);
+
 
 // NFC pins 10, 11, 12, 13
 #define SS_PIN 10
@@ -36,28 +38,24 @@ float TimeToEat = 500;
 float TimeToPoop = 500;
 float TimeToScream = 500;
 
-#define ledp 2 // digital pin for the main LED
+//#define ledp 2 // digital pin for the main LED
 
 void setup()
 {
-  DFPlayerSerial.begin(9600); // Start communication with DFPlayer Mini
-  if (player.begin(DFPlayerSerial))
-  {
-    player.volume(30);
-    player.play(1);
-  }
-  else
-  {
-    Serial.println("Connecting to DFPlayer Mini failed!");
-  }
-
+  
   // Sleep Button and LED
-  pinMode(2, OUTPUT); // LED
+  // pinMode(2, OUTPUT); // LED
   // pinMode(3, INPUT);  // Button
 
   // Normal Serial
   Serial.begin(9600);
-  Serial.print("\nSerial READY\n");
+  Serial.print("Serial READY\n");
+
+  //DFPlayer Serial
+  FPSerial.begin(9600);
+  Serial.begin(9600);
+  myDFPlayer.begin(FPSerial);
+  Serial.println("DFPlayer READY\n");
 
   // BT Serial
   btserial.begin(9600);
@@ -75,19 +73,18 @@ void setup()
   SPI.begin();     // init SPI bus
   rfid.PCD_Init(); // init MFRC522
   Serial.print("NFC READY\n");
-
-
 }
   void loop()
   {
     btRead();
-    //delay(2000);
+    delay(2000);
     Serial.print("\n");
     readNFC();
-    //delay(2000);
+    delay(2000);
     Serial.print("\n");
     readimu();
-    //delay(2000);
+    delay(2000);
     Serial.print("\n");
     sleepbutton();
+    signalAOK();
   }

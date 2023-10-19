@@ -19,6 +19,5 @@ void readNFC()
             rfid.PICC_HaltA();      // halt PICC
             rfid.PCD_StopCrypto1(); // stop encryption on PCD
         }
-        signalAOK();
-    }
+   }
 }

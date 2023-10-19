@@ -31,5 +31,5 @@ void readimu()
   Serial.println();
 
   // delay
-  // delay(2500);
+  delay(2500);
 }
