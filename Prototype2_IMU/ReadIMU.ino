@@ -19,7 +19,7 @@ void readimu()
   Serial.print(" | aY = ");
   Serial.print(convert_int16_to_str(accelerometer_y));
   Serial.print(" | aZ = ");
-  Serial.print(convert_int16_to_str(accelerometer_z) + "\n");
+  Serial.print(convert_int16_to_str(accelerometer_z));
 
   // print out data from gyroscope
   Serial.print(" | gX = ");
@@ -27,6 +27,6 @@ void readimu()
   Serial.print(" | gY = ");
   Serial.print(convert_int16_to_str(gyro_y));
   Serial.print(" | gZ = ");
-  Serial.print(convert_int16_to_str(gyro_z) + "\n");
+  Serial.print(convert_int16_to_str(gyro_z));
   Serial.println();
 }

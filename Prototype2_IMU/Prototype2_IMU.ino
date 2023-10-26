@@ -55,10 +55,6 @@ void setup()
   myDFPlayer.begin(FPSerial);
   Serial.println("DFPlayer READY\n");
 
-  // BT Serial
-  // btserial.begin(9600);
-  // Serial.print("BT READY\n");
-
   // IMU
   Wire.begin();
   Wire.beginTransmission(MPU_ADDR); // Begins a transmission to the I2C slave (GY-521 board)
@@ -74,8 +70,7 @@ void setup()
 }
 void loop()
 {
-  btRead();
+
   readNFC();
   readimu();
-  sleepbutton();
 }
