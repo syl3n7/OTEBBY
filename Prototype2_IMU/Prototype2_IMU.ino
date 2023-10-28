@@ -29,8 +29,9 @@ char *convert_int16_to_str(int16_t i)
 }
 
 // CSJL DHT11
-#define DHTPIN 2       // what pin dht11 is connected to
+#define DHTPIN A2       // what pin dht11 is connected to
 #define DHTMODEL DHT11 // what model of dht sensor
+DHT dht2 = DHT(DHTPIN, DHTMODEL);
 
 // Global Baby Variables
 float babyHunger = 0;
@@ -48,10 +49,11 @@ void setup()
   Serial.print("Serial READY\n");
 
   // Temperature and humidity sensor
+  dht2.begin();
+  Serial.print("Temp READY");
 
   // DFPlayer Serial
   FPSerial.begin(9600);
-  Serial.begin(9600);
   myDFPlayer.begin(FPSerial);
   Serial.println("DFPlayer READY\n");
 
@@ -67,10 +69,13 @@ void setup()
   SPI.begin();     // init SPI bus
   rfid.PCD_Init(); // init MFRC522
   Serial.print("NFC READY\n");
+
+  myDFPlayer.volume(100); // Set volume value. From 0 to 30
+  myDFPlayer.play(3);     // Play the first mp3
 }
 void loop()
 {
-
+  readTempHum();
   readNFC();
   readimu();
 }
