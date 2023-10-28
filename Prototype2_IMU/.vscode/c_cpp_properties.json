@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Arduino",
-            "compilerPath": "C:\\Users\\claud\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\avr-gcc\\7.3.0-atmel3.6.1-arduino7\\bin\\avr-g++",
+            "compilerPath": "/home/lau/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++",
             "compilerArgs": [
                 "-w",
                 "-std=gnu++11",
@@ -16,21 +16,21 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "C:\\Users\\claud\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\cores\\arduino",
-                "C:\\Users\\claud\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\variants\\standard",
-                "C:\\Users\\claud\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\SoftwareSerial\\src",
-                "C:\\Users\\claud\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\Wire\\src",
-                "C:\\Users\\claud\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\SPI\\src",
-                "C:\\Users\\claud\\Documents\\Arduino\\libraries\\MFRC522\\src",
-                "C:\\Users\\claud\\Documents\\Arduino\\libraries\\DFRobotDFPlayerMini",
-                "C:\\Users\\claud\\Documents\\Arduino\\libraries\\DHT_sensor_library",
-                "C:\\Users\\claud\\Documents\\Arduino\\libraries\\Adafruit_Unified_Sensor",
-                "c:\\users\\claud\\appdata\\local\\arduino15\\packages\\arduino\\tools\\avr-gcc\\7.3.0-atmel3.6.1-arduino7\\lib\\gcc\\avr\\7.3.0\\include",
-                "c:\\users\\claud\\appdata\\local\\arduino15\\packages\\arduino\\tools\\avr-gcc\\7.3.0-atmel3.6.1-arduino7\\lib\\gcc\\avr\\7.3.0\\include-fixed",
-                "c:\\users\\claud\\appdata\\local\\arduino15\\packages\\arduino\\tools\\avr-gcc\\7.3.0-atmel3.6.1-arduino7\\avr\\include"
+                "/home/lau/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino",
+                "/home/lau/.arduino15/packages/arduino/hardware/avr/1.8.6/variants/standard",
+                "/home/lau/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SoftwareSerial/src",
+                "/home/lau/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/Wire/src",
+                "/home/lau/.arduino15/packages/arduino/hardware/avr/1.8.6/libraries/SPI/src",
+                "/home/lau/Arduino/libraries/MFRC522/src",
+                "/home/lau/Arduino/libraries/DFRobotDFPlayerMini",
+                "/home/lau/Arduino/libraries/DHT_sensor_library",
+                "/home/lau/Arduino/libraries/Adafruit_Unified_Sensor",
+                "/home/lau/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/lib/gcc/avr/7.3.0/include",
+                "/home/lau/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/lib/gcc/avr/7.3.0/include-fixed",
+                "/home/lau/.arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/avr/include"
             ],
             "forcedInclude": [
-                "C:\\Users\\claud\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\cores\\arduino\\Arduino.h"
+                "/home/lau/.arduino15/packages/arduino/hardware/avr/1.8.6/cores/arduino/Arduino.h"
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",
