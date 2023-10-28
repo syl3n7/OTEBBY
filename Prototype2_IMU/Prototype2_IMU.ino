@@ -50,7 +50,7 @@ void setup()
 
   // Temperature and humidity sensor
   dht2.begin();
-  Serial.print("Temp READY");
+  Serial.print("Temp READY\n");
 
   // DFPlayer Serial
   FPSerial.begin(9600);
@@ -69,9 +69,6 @@ void setup()
   SPI.begin();     // init SPI bus
   rfid.PCD_Init(); // init MFRC522
   Serial.print("NFC READY\n");
-
-  myDFPlayer.volume(100); // Set volume value. From 0 to 30
-  myDFPlayer.play(3);     // Play the first mp3
 }
 void loop()
 {
