@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
-    "port": "COM4",
+    "port": "/dev/ttyACM0",
     "sketch": "Prototype2_IMU.ino"
 }
