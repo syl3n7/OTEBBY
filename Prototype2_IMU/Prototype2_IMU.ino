@@ -97,7 +97,6 @@ void setup()
 
 void loop()
 {
-  Serial.println("hello");
   readTempHum();
   readNFC();
   readimu();
