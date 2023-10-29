@@ -1,32 +1,21 @@
 void readimu()
 {
-  Wire.beginTransmission(MPU_ADDR);
-  Wire.write(0x3B);                        // starting with register 0x3B (ACCEL_XOUT_H) [MPU-6000 and MPU-6050 Register Map and Descriptions Revision 4.2, p.40]
-  Wire.endTransmission(false);             // the parameter indicates that the Arduino will send a restart. As a result, the connection is kept active.
-  Wire.requestFrom(MPU_ADDR, 7 * 2, true); // request a total of 7*2=14 registers
+  sensor.getAcceleration(&ax, &ay, &az);
+  sensor.getRotation(&gx, &gy, &gz);
+  float ax_m_s2 = ax * (9.81/16384.0);
+  float ay_m_s2 = ay * (9.81/16384.0);
+  float az_m_s2 = az * (9.81/16384.0);
+  float gx_deg_s = gx * (250.0/32768.0);
+  float gy_deg_s = gy * (250.0/32768.0);
+  float gz_deg_s = gz * (250.0/32768.0);
+  //Mostrar las lecturas separadas por un [tab]
+  Serial.print("a[x y z](m/s2) g[x y z](deg/s):\t");
+  Serial.print(ax_m_s2); Serial.print("\t");
+  Serial.print(ay_m_s2); Serial.print("\t");
+  Serial.print(az_m_s2); Serial.print("\t");
+  Serial.print(gx_deg_s); Serial.print("\t");
+  Serial.print(gy_deg_s); Serial.print("\t");
+  Serial.println(gz_deg_s);
 
-  // "Wire.read()<<8 | Wire.read();" means two registers are read and stored in the same variable
-  accelerometer_x = Wire.read() << 8 | Wire.read(); // reading registers: 0x3B (ACCEL_XOUT_H) and 0x3C (ACCEL_XOUT_L)
-  accelerometer_y = Wire.read() << 8 | Wire.read(); // reading registers: 0x3D (ACCEL_YOUT_H) and 0x3E (ACCEL_YOUT_L)
-  accelerometer_z = Wire.read() << 8 | Wire.read(); // reading registers: 0x3F (ACCEL_ZOUT_H) and 0x40 (ACCEL_ZOUT_L)
-  gyro_x = Wire.read() << 8 | Wire.read();          // reading registers: 0x43 (GYRO_XOUT_H) and 0x44 (GYRO_XOUT_L)
-  gyro_y = Wire.read() << 8 | Wire.read();          // reading registers: 0x45 (GYRO_YOUT_H) and 0x46 (GYRO_YOUT_L)
-  gyro_z = Wire.read() << 8 | Wire.read();          // reading registers: 0x47 (GYRO_ZOUT_H) and 0x48 (GYRO_ZOUT_L)
-
-  // print out data from accelerometer
-  Serial.print("aX = ");
-  Serial.print(convert_int16_to_str(accelerometer_x));
-  Serial.print(" | aY = ");
-  Serial.print(convert_int16_to_str(accelerometer_y));
-  Serial.print(" | aZ = ");
-  Serial.print(convert_int16_to_str(accelerometer_z));
-
-  // print out data from gyroscope
-  Serial.print(" | gX = ");
-  Serial.print(convert_int16_to_str(gyro_x));
-  Serial.print(" | gY = ");
-  Serial.print(convert_int16_to_str(gyro_y));
-  Serial.print(" | gZ = ");
-  Serial.print(convert_int16_to_str(gyro_z));
-  Serial.println();
+  delay(100);
 }
