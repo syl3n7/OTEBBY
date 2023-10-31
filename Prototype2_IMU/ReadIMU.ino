@@ -8,7 +8,8 @@ void readimu()
   float gx_deg_s = gx * (250.0/32768.0);
   float gy_deg_s = gy * (250.0/32768.0);
   float gz_deg_s = gz * (250.0/32768.0);
-  //Mostrar las lecturas separadas por un [tab]
+  
+  //DEBUG PRINTS
   Serial.print("a[x y z](m/s2) g[x y z](deg/s):\t");
   Serial.print(ax_m_s2); Serial.print("\t");
   Serial.print(ay_m_s2); Serial.print("\t");

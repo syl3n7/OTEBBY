@@ -41,6 +41,7 @@ MFRC522 rfid(SS_PIN, RST_PIN);
 DHT dht2 = DHT(DHTPIN, DHTMODEL); //create an object with the pin and model of DHT.
 
 // Global Baby Variables
+#define EatPin 2;
 float babyHunger = 0;
 float babyThirst = 0;
 float babyFatigue = 0;
@@ -63,10 +64,6 @@ void setup()
   gy_o=sensor.getYGyroOffset();
   gz_o=sensor.getZGyroOffset();
 
-  Serial.println("Press a key on the serial console to calibrate.");
-  while (true){if (Serial.available()) break;}  
-  Serial.println("Calibrating IMU");
-
   // Normal Serial
   Serial.begin(9600);
   Serial.print("Serial READY\n");
@@ -78,6 +75,7 @@ void setup()
   // DFPlayer Serial
   FPSerial.begin(9600);
   myDFPlayer.begin(FPSerial);
+  myDFPlayer.volume(100);  // Set volume value. From 0 to 30
   Serial.println("DFPlayer READY\n");
 
   // NFC
@@ -98,6 +96,21 @@ void setup()
 void loop()
 {
   readTempHum();
-  readNFC();
+  sleep();
   readimu();
+  
+  if(babyThirst <= 30 || babyHunger <= 30) 
+  {
+    if (digitalRead(EatPin) == HIGH)
+    {
+      eat();    
+    }
+    else{
+      makehunger();
+    }
+  }
+  else 
+  {
+    makehunger();
+  }
 }
