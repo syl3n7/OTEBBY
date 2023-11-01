@@ -4,7 +4,7 @@ void checkAttitude (){
   {
     babyAttitude = babyAttitude - 30;
   }
-  else if(babyTemperature => 24)
+  else if(babyTemperature >= 24)
   {
     babyAttitude = babyAttitude - 30;
   }
@@ -13,7 +13,7 @@ void checkAttitude (){
     babyAttitude = babyAttitude + 15;
   }  
 
-  LowPower.idle(SLEEP_8S, ADC_OFF, TIMER2_OFF, TIMER1_OFF, TIMER0_OFF, SPI_OFF, USART0_OFF, TWI_OFF);
+  //LowPower.idle(SLEEP_8S, ADC_OFF, TIMER2_OFF, TIMER1_OFF, TIMER0_OFF, SPI_OFF, USART0_OFF, TWI_OFF);
   
   delay(2000);
 }
