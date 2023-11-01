@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include <SoftwareSerial.h>      // Library for bluetooth communication
+#include <SoftwareSerial.h> // Library for bluetooth communication
 #include "I2Cdev.h"
 #include "MPU6050.h"
 #include "Wire.h"
@@ -7,7 +7,6 @@
 #include <MFRC522.h>             // for NFC
 #include "DFRobotDFPlayerMini.h" // for DF Player MINI module
 #include "DHT.h"                 // for DHT11
-#include <LowPower.h>
 
 // DF Player Mini uses pin 4 for RX and 3 for TX
 SoftwareSerial softSerial(4, 3);
@@ -24,6 +23,7 @@ MFRC522 rfid(SS_PIN, RST_PIN);
 MPU6050 sensor(0x69);
 int ax, ay, az;
 int gx, gy, gz;
+float total = 0;
 
 // CSJL DHT11
 #define DHTPIN A2      // what pin dht11 is connected to
@@ -54,8 +54,8 @@ void setup()
   Serial.println("DFPlayer READY\n");
 
   // IMU
-  Wire.begin();           //Iniciando I2C  
-  sensor.initialize();    //Iniciando el sensor
+  Wire.begin();        // Iniciando I2C
+  sensor.initialize(); // Iniciando el sensor
   Serial.print("IMU READY\n");
 
   // NFC
@@ -63,20 +63,20 @@ void setup()
   rfid.PCD_Init(); // init MFRC522
   Serial.print("NFC READY\n");
 
-  //pinMode(inPin, INPUT); //for eating
-  pinMode(2, INPUT); 
+  // pinMode(inPin, INPUT); //for eating
+  pinMode(2, INPUT);
 }
 
 void loop()
 {
-  
-  //update the temperature
+
+  // update the temperature
   babyHumidity = dht2.readHumidity();
   babyTemperature = dht2.readTemperature();
 
   checkAttitude();
 
-  if(digitalRead(2) == LOW)
+  if (digitalRead(2) == LOW)
   {
     makehunger();
     Serial.println("getting hungry!");
@@ -84,11 +84,10 @@ void loop()
   else
   {
     eat();
-    Serial.println("yummy!"); 
+    Serial.println("yummy!");
   }
-  
+
   sleep();
-  
+
   readimu();
-  
 }
