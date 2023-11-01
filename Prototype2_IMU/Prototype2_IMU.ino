@@ -74,7 +74,13 @@ void setup()
 }
 void loop()
 {
-  readTempHum();
-  readNFC();
+  
+  readTempHum(); //update the temperature
+
+  checkAttitude();
+  
+  sleep();
+  
   readimu();
+  
 }
