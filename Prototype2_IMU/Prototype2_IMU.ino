@@ -7,7 +7,7 @@
 #include "DHT.h"                 // for DHT11
 
 // DF Player Mini uses pin 4 for RX and 3 for TX
-SoftwareSerial softSerial(/*rx =*/4, /*tx =*/3);
+SoftwareSerial softSerial(4, 3);
 #define FPSerial softSerial
 DFRobotDFPlayerMini myDFPlayer;
 void printDetail(uint8_t type, int value);
@@ -43,7 +43,6 @@ float babyAttitude = 100;
 
 void setup()
 {
-
   // Normal Serial
   Serial.begin(9600);
   Serial.print("Serial READY\n");
