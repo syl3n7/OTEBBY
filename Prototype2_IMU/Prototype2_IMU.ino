@@ -35,7 +35,7 @@ float babyHunger = 0;
 float babyThirst = 0;
 float babyFatigue = 0;
 float babyTemperature = 0;
-float babyHumidity = 0;
+// float babyHumidity = 0;
 float babyAttitude = 100;
 
 void setup()
@@ -71,7 +71,7 @@ void loop()
 {
 
   // update the temperature
-  babyHumidity = dht2.readHumidity();
+  // babyHumidity = dht2.readHumidity();
   babyTemperature = dht2.readTemperature();
 
   checkAttitude();
