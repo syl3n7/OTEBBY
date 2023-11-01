@@ -29,7 +29,7 @@ char *convert_int16_to_str(int16_t i)
 }
 
 // CSJL DHT11
-#define DHTPIN A2       // what pin dht11 is connected to
+#define DHTPIN A2      // what pin dht11 is connected to
 #define DHTMODEL DHT11 // what model of dht sensor
 DHT dht2 = DHT(DHTPIN, DHTMODEL);
 
@@ -39,7 +39,7 @@ float babyThirst = 0;
 float babyFatigue = 0;
 float babyTemperature = 0;
 float babyHumidity = 0;
-float babyAttitude = 1000.0;
+float babyAttitude = 100;
 
 void setup()
 {
