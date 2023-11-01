@@ -7,6 +7,7 @@
 #include <MFRC522.h>             // for NFC
 #include "DFRobotDFPlayerMini.h" // for DF Player MINI module
 #include "DHT.h"                 // for DHT11
+#include <LowPower.h>
 
 // DF Player Mini uses pin 4 for RX and 3 for TX
 SoftwareSerial softSerial(4, 3);
@@ -20,8 +21,7 @@ void printDetail(uint8_t type, int value);
 MFRC522 rfid(SS_PIN, RST_PIN);
 
 // IMU
-MPU6050 sensor;
-
+MPU6050 sensor(0x69);
 int ax, ay, az;
 int gx, gy, gz;
 
@@ -63,15 +63,29 @@ void setup()
   rfid.PCD_Init(); // init MFRC522
   Serial.print("NFC READY\n");
 
-  myDFPlayer.volume(100); // Set volume value. From 0 to 30
-  myDFPlayer.play(3);     // Play the first mp3
+  //pinMode(inPin, INPUT); //for eating
+  pinMode(2, INPUT); 
 }
+
 void loop()
 {
   
-  readTempHum(); //update the temperature
+  //update the temperature
+  babyHumidity = dht2.readHumidity();
+  babyTemperature = dht2.readTemperature();
 
   checkAttitude();
+
+  if(digitalRead(2) == LOW)
+  {
+    makehunger();
+    Serial.println("getting hungry!");
+  }
+  else
+  {
+    eat();
+    Serial.println("yummy!"); 
+  }
   
   sleep();
   
