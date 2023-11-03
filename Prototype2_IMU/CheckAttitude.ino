@@ -16,9 +16,9 @@ void checkAttitude()
     babyAttitude = babyAttitude + 10;
     if (babyAttitude >= 100) babyAttitude = 100;
   }
-  Serial.print(" ");
+  Serial.print(" T");
   Serial.print(babyTemperature);
-  Serial.print(" ");
+  Serial.print(" A");
   
   //hunger affects attitude
   if (babyHunger < 50)
@@ -37,7 +37,7 @@ void checkAttitude()
     if (babyAttitude >= 100) babyAttitude = 100;
   }
   Serial.print(babyAttitude);
-  Serial.print(" ");
+  Serial.print(" H");
   Serial.print(babyHunger);
   Serial.print(" ");
 }
