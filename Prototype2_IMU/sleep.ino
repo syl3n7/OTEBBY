@@ -8,5 +8,5 @@ void sleep()
     Serial.println("going to sleep");
   if (hungry)
     wake();
-  delay(5000); // sleep for a minute //changed to 5 seconds for the demo
+  delay(5000 /*timeToSleep*/); // sleep for a minute | changed to 5 seconds for the demo
 }
