@@ -1,10 +1,10 @@
 void eat()
 {
   babyHunger = babyHunger + 5;
-  if (babyHunger >= 85) 
+  if (babyHunger >= 100) 
   {
     babyHunger = 100;
-    if (!hungry) readimu();
+    //if (!hungry) readimu();
     hungry = false;
   }
   delay(defaultDelay);
@@ -12,11 +12,8 @@ void eat()
 
 void makehunger()
 {
-  babyHunger = babyHunger - 5;
-  if (babyHunger <= 30) 
-  {
-    babyHunger = 0;
-    hungry = true;
-  }
+  babyHunger = babyHunger - 7;
+  if (babyHunger <= 50) hungry = true;
+  if (babyHunger <= 0) babyHunger = 0;
   delay(defaultDelay);
 }

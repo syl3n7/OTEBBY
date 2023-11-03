@@ -23,17 +23,17 @@ void checkAttitude()
   //hunger affects attitude
   if (babyHunger < 50)
   {
-    babyAttitude = babyAttitude - 5;
+    babyAttitude = babyAttitude - 11;
     if (babyAttitude <= 0) babyAttitude = 0;
   }
   else if (babyHunger > 70)
   {
-    babyAttitude = babyAttitude + 5;
+    babyAttitude = babyAttitude + 7;
     if (babyAttitude >= 100) babyAttitude = 100;
   }
   else
   {
-    babyAttitude = babyAttitude + 2;
+    babyAttitude = babyAttitude + 5;
     if (babyAttitude >= 100) babyAttitude = 100;
   }
   Serial.print(babyAttitude);
