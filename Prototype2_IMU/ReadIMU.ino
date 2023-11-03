@@ -10,8 +10,23 @@ void readimu()
   // float gz_deg_s = gz * (250.0 / 32768.0);
 
   // DEBUG PRINTS
-  total = float(ax_m_s2 + ay_m_s2 + az_m_s2);
-  Serial.println(total);
+  float total1 = ax + ay + az;
+  float total2 = ax + ay + az;
+  float total3 = ax + ay + az;
+
+  while(!hungry && babyHunger >= 75){
+    
+    if(total1 >= 300 && total2 >= 300 && total3 >= 300)
+    {
+      babyAttitude = babyAttitude + 5;
+      if (babyAttitude >= 100) babyAttitude = 100;
+      int a = random(0,13);
+      if(a == 3 || a == 7 || a == 11) sleep(); // can sleep in the arms if we get number 3, 7, or 11.
+    }
+    
+  }
+  
+  Serial.print(total);
 
   delay(100);
 }

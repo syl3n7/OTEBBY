@@ -1,16 +1,37 @@
 void checkAttitude()
 {
-
-  if (babyTemperature <= 18)
+ //temperature affects attitude
+ if (babyTemperature <= 18)
   {
-    babyAttitude = babyAttitude - 30;
+    babyAttitude = babyAttitude - 2;
+    if (babyAttitude <= 0) babyAttitude = 0;
   }
-  else if (babyTemperature >= 24)
+  else if (babyTemperature > 27)
   {
-    babyAttitude = babyAttitude - 30;
+    babyAttitude = babyAttitude - 3;
+    if (babyAttitude <= 0) babyAttitude = 0;
   }
   else
   {
-    babyAttitude = babyAttitude + 15;
+    babyAttitude = babyAttitude + 10;
+    if (babyAttitude >= 100) babyAttitude = 100;
   }
+  Serial.print(" ");
+  Serial.print(babyTemperature);
+  Serial.print(" ");
+  
+  //hunger affects attitude
+  if (babyHunger < 50)
+  {
+    babyAttitude = babyAttitude - 5;
+    if (babyAttitude <= 0) babyAttitude = 0;
+  }
+  else
+  {
+    babyAttitude = babyAttitude + 5;
+    if (babyAttitude >= 100) babyAttitude = 100;
+  }
+  Serial.print(babyAttitude);
+  Serial.print(" ");
+  Serial.print(babyHunger);
 }

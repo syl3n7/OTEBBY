@@ -1,8 +1,8 @@
 #include "Arduino.h"
-#include <SoftwareSerial.h> // Library for bluetooth communication
-#include "I2Cdev.h"
-#include "MPU6050.h"
-#include "Wire.h"
+#include <SoftwareSerial.h>      // Library for software serial
+#include "I2Cdev.h"              // for MPU6050
+#include "MPU6050.h"             // for MPU6050
+#include "Wire.h"                // for MPU6050
 #include <SPI.h>                 // for NFC
 #include <MFRC522.h>             // for NFC
 #include "DFRobotDFPlayerMini.h" // for DF Player MINI module
@@ -31,12 +31,14 @@ float total = 0;
 DHT dht2 = DHT(DHTPIN, DHTMODEL);
 
 // Global Baby Variables
-float babyHunger = 0;
-float babyThirst = 0;
-float babyFatigue = 0;
-float babyTemperature = 0;
-// float babyHumidity = 0;
-float babyAttitude = 100;
+float babyHunger = 100; //if 0 hes very hungry, if 100 not hungry
+float babyTemperature = 0; //if 18c or less he's cold, if 27 or more he's hot, the in between is the sweet spot.
+float babyAttitude = 100; //the lower the number the heavier are the cries
+int timeToSleep = 60000; // time to make the baby sleep each time he is ok :)
+int defaultDelay = 35; 
+int soundDelay = 10000; // 10 sec wait after playing a sound.
+bool sleeping = false;
+bool hungry = false;
 
 void setup()
 {
@@ -53,9 +55,9 @@ void setup()
   myDFPlayer.begin(FPSerial);
   Serial.println("DFPlayer READY\n");
 
-  // IMU
-  Wire.begin();        // Iniciando I2C
-  sensor.initialize(); // Iniciando el sensor
+  // Inicialize I2C IMU
+  Wire.begin();        // 
+  sensor.initialize(); // 
   Serial.print("IMU READY\n");
 
   // NFC
@@ -63,31 +65,41 @@ void setup()
   rfid.PCD_Init(); // init MFRC522
   Serial.print("NFC READY\n");
 
-  // pinMode(inPin, INPUT); //for eating
+  // pinMode(inPin, INPUT); //for eating //added a resistor to stop the short and read accurately from pin D2.
   pinMode(2, INPUT);
 }
 
 void loop()
 {
-
-  // update the temperature
-  // babyHumidity = dht2.readHumidity();
+  // Update the temperature and humidity
+  // babyHumidity = dht2.readHumidity(); //no longer used
   babyTemperature = dht2.readTemperature();
-
-  checkAttitude();
-
-  if (digitalRead(2) == LOW)
+  
+  if(sleeping) 
   {
+    sleep();
+    checkAttitude();
     makehunger();
-    Serial.println("getting hungry!");
   }
   else
-  {
-    eat();
-    Serial.println("yummy!");
+  {  
+    wake();
+
+    if (digitalRead(2) == HIGH)
+    {
+      eat();
+      Serial.println("yummy! nrml");
+    }
+    else
+    {
+      makehunger();
+      Serial.println("getting hungry! nrml");
+    }
+  
+    if (rfid.PICC_IsNewCardPresent() && babyHunger > 75 || rfid.PICC_IsNewCardPresent() && babyAttitude > 65) 
+    {
+        sleeping = true;
+        sleep();
+    }
   }
-
-  sleep();
-
-  readimu();
 }

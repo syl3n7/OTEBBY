@@ -1,16 +1,20 @@
 void wake()
 {
+  sleeping = false;
   if (babyAttitude > 70)
   {
     myDFPlayer.play(1);
+    delay(soundDelay);
   }
   else if (babyAttitude < 20)
   {
     myDFPlayer.play(10);
+    delay(soundDelay);
   }
   else
   {
     myDFPlayer.play(12);
+    delay(soundDelay);
   }
-  delay(10000);
+  checkAttitude();
 }
