@@ -14,18 +14,18 @@ void readimu()
   float total2 = ax + ay + az;
   float total3 = ax + ay + az;
 
-  while(!hungry && babyHunger >= 75){
-    
-    if(total1 >= 300 && total2 >= 300 && total3 >= 300)
-    {
-      babyAttitude = babyAttitude + 5;
-      if (babyAttitude >= 100) babyAttitude = 100;
-      int a = random(0,13);
-      if(a == 3 || a == 7 || a == 11) sleep(); // can sleep in the arms if we get number 3, 7, or 11.
-    }
-    
-  }
-  
+//  while(!hungry && babyHunger >= 90){
+//    
+//    if(total1 >= 300 && total2 >= 300 && total3 >= 300)
+//    {
+//      babyAttitude = babyAttitude + 5;
+//      if (babyAttitude >= 100) babyAttitude = 100;
+//      int a = random(0,13);
+//      if(a == 3 || a == 7 || a == 11) sleep(); // can sleep in the arms if we get number 3, 7, or 11.
+//    }
+//    
+//  }
+  Serial.print(" ");
   Serial.print(total);
 
   delay(100);

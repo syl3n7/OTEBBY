@@ -56,8 +56,8 @@ void setup()
   Serial.println("DFPlayer READY\n");
 
   // Inicialize I2C IMU
-  Wire.begin();        // 
-  sensor.initialize(); // 
+  Wire.begin();         
+  sensor.initialize(); 
   Serial.print("IMU READY\n");
 
   // NFC
@@ -84,15 +84,20 @@ void loop()
   else
   {  
     wake();
-
+      
     if (digitalRead(2) == HIGH)
-    {
+    {    
+      myDFPlayer.play(9);
       eat();
+      Serial.print(" ");
       Serial.println("yummy! nrml");
+      delay(soundDelay+5000);
     }
     else
     {
+      myDFPlayer.pause();
       makehunger();
+      Serial.print(" ");
       Serial.println("getting hungry! nrml");
     }
   

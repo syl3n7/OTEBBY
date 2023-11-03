@@ -1,6 +1,7 @@
 void wake()
 {
   sleeping = false;
+  Serial.println("AWAKE");
   if (babyAttitude > 70)
   {
     myDFPlayer.play(1);

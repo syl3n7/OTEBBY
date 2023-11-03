@@ -26,12 +26,18 @@ void checkAttitude()
     babyAttitude = babyAttitude - 5;
     if (babyAttitude <= 0) babyAttitude = 0;
   }
-  else
+  else if (babyHunger > 70)
   {
     babyAttitude = babyAttitude + 5;
+    if (babyAttitude >= 100) babyAttitude = 100;
+  }
+  else
+  {
+    babyAttitude = babyAttitude + 2;
     if (babyAttitude >= 100) babyAttitude = 100;
   }
   Serial.print(babyAttitude);
   Serial.print(" ");
   Serial.print(babyHunger);
+  Serial.print(" ");
 }
